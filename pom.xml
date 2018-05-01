@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.jaoafa</groupId>
-  <artifactId>jaoProtector</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>jaoProtector</name>
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.jaoafa</groupId>
+	<artifactId>jaoProtector</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>jaoProtector</name>
+	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -32,6 +33,10 @@
 			<id>TheCentralRepository</id>
 			<url>https://repo1.maven.org/maven2/</url>
 		</repository>
+		<repository>
+			<id>sk89q-repo</id>
+			<url>http://maven.sk89q.com/repo/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<!--Spigot-API -->
@@ -53,6 +58,37 @@
 			<version>1.12.2-R0.1-SNAPSHOT</version>
 			<systemPath>${basedir}/lib/craftbukkit-1.12.2.jar</systemPath>
 			<scope>system</scope>
+		</dependency>
+		<!-- WorldGuard -->
+		<dependency>
+			<groupId>com.sk89q.worldguard</groupId>
+			<artifactId>worldguard</artifactId>
+			<version>6.2.1;84bc322</version>
+			<systemPath>${basedir}/lib/worldguard-6.2.1.jar</systemPath>
+			<scope>system</scope>
+		</dependency>
+		<!-- WorldEdit -->
+		<dependency>
+			<groupId>com.sk89q.worldedit</groupId>
+			<artifactId>worldedit</artifactId>
+			<version>6.1.8-SNAPSHOT;cd4729f</version>
+			<systemPath>${basedir}/lib/worldedit-bukkit-6.1.7.3.jar</systemPath>
+			<scope>system</scope>
+		</dependency>
+		<!-- PermissionsEx(PEX) -->
+		<dependency>
+			<groupId>ru.tehkode</groupId>
+			<artifactId>PermissionsEx</artifactId>
+			<version>1.23.4</version>
+			<classifier>shaded</classifier>
+			<systemPath>${basedir}/lib/PermissionsEx.jar</systemPath>
+			<scope>system</scope>
+		</dependency>
+		<!-- LuckPerms -->
+		<dependency>
+			<groupId>me.lucko.luckperms</groupId>
+			<artifactId>luckperms-api</artifactId>
+			<version>4.0</version>
 		</dependency>
 	</dependencies>
 	<url>http://jaoafa.com/</url>
