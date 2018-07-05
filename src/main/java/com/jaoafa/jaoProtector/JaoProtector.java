@@ -10,24 +10,21 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.annotation.Nullable;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.jaoafa.jaoProtector.Command.Cmd_ChuoCity;
-import com.jaoafa.jaoProtector.Command.Cmd_Protector;
+import com.jaoafa.jaoProtector.Event.Event_Lava;
+import com.jaoafa.jaoProtector.Event.Event_TNT;
+import com.jaoafa.jaoProtector.Event.Event_Water;
 import com.jaoafa.jaoProtector.Lib.Discord;
 import com.jaoafa.jaoProtector.Lib.MySQL;
 import com.jaoafa.jaoProtector.Lib.PermissionsManager;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class JaoProtector extends JavaPlugin {
 
@@ -46,13 +43,33 @@ public class JaoProtector extends JavaPlugin {
 	 */
 	@Override
 	public void onEnable() {
-		getCommand("protector").setExecutor(new Cmd_Protector(this));
-		getCommand("chuocity").setExecutor(new Cmd_ChuoCity(this));
-
 		JavaPlugin = this;
+
+		// リスナーを設定
+		Import_Listener();
 
 		Load_Config(); // Config Load
 	}
+
+	/**
+	 * リスナー設定
+	 * @author mine_book000
+	 */
+	private void Import_Listener(){
+		// 日付は制作完了(登録)の日付
+		registEvent(new Event_TNT(this)); // 2018/06/30
+		registEvent(new Event_Water(this)); // 2018/06/30
+		registEvent(new Event_Lava(this)); // 2018/06/30
+	}
+
+	/**
+	 * リスナー設定の簡略化用
+	 * @param listener Listener
+	 */
+	private void registEvent(Listener l) {
+		getServer().getPluginManager().registerEvents(l, this);
+	}
+
 	/**
 	 * プラグインが停止したときに呼び出し
 	 * @author mine_book000
@@ -61,30 +78,6 @@ public class JaoProtector extends JavaPlugin {
 	@Override
 	public void onDisable() {
 
-	}
-
-	@Nullable
-	public static WorldGuardPlugin getWorldGuard() {
-		Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
-
-		// WorldGuard may not be loaded
-		if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
-			return null; // Maybe you want throw an exception instead
-		}
-
-		return (WorldGuardPlugin) plugin;
-	}
-
-	@Nullable
-	public static WorldEditPlugin getWorldEdit() {
-		Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-
-		// WorldGuard may not be loaded
-		if (plugin == null || !(plugin instanceof WorldEditPlugin)) {
-			return null; // Maybe you want throw an exception instead
-		}
-
-		return (WorldEditPlugin) plugin;
 	}
 
 	/**
@@ -98,7 +91,7 @@ public class JaoProtector extends JavaPlugin {
 			Discord.start(this, conf.getString("discordtoken"));
 		}else{
 			getLogger().info("Discordへの接続に失敗しました。 [conf NotFound]");
-			getLogger().info("Disable jaoSuperAchievement...");
+			getLogger().info("Disable jaoProtector...");
 			getServer().getPluginManager().disablePlugin(this);
 		}
 		if(conf.contains("sqluser") && conf.contains("sqlpassword")){
@@ -106,7 +99,7 @@ public class JaoProtector extends JavaPlugin {
 			sqlpassword = conf.getString("sqlpassword");
 		}else{
 			getLogger().info("MySQL Connect err. [conf NotFound]");
-			getLogger().info("Disable jaoSuperAchievement...");
+			getLogger().info("Disable jaoProtector...");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
@@ -122,13 +115,13 @@ public class JaoProtector extends JavaPlugin {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			getLogger().info("MySQL Connect err. [ClassNotFoundException]");
-			getLogger().info("Disable jaoSuperAchievement...");
+			getLogger().info("Disable jaoProtector...");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			getLogger().info("MySQL Connect err. [SQLException: " + e.getSQLState() + "]");
-			getLogger().info("Disable jaoSuperAchievement...");
+			getLogger().info("Disable jaoProtector...");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}

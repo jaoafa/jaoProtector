@@ -3,16 +3,5 @@ main: com.jaoafa.jaoProtector.JaoProtector
 version: 0.0.1
 description: jao Minecraft Server 保護プラグイン
 database: true
-softdepend: [PermissionsEx, LuckPerms, WorldGuard]
+softdepend: [PermissionsEx, LuckPerms]
 author: mine_book000
-commands:
-   protector:
-      description: このプラグインに関する設定や情報が確認できます。
-      usage: /<command>
-      permission: jaosuperachievement.protector
-      permission-message: You do not have permission to perform this command.
-   chuocity:
-      description: 中央市に関する作業が行えます。
-      usage: /<command>
-      permission: jaosuperachievement.chuocity
-      permission-message: You do not have permission to perform this command.
