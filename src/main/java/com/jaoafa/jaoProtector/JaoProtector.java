@@ -19,7 +19,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.jaoafa.jaoProtector.Event.Event_EndCrystal;
+import com.jaoafa.jaoProtector.Event.Event_Fire;
+import com.jaoafa.jaoProtector.Event.Event_FireBall;
+import com.jaoafa.jaoProtector.Event.Event_Flint_and_steel;
 import com.jaoafa.jaoProtector.Event.Event_Lava;
+import com.jaoafa.jaoProtector.Event.Event_MobSpawner;
 import com.jaoafa.jaoProtector.Event.Event_TNT;
 import com.jaoafa.jaoProtector.Event.Event_Water;
 import com.jaoafa.jaoProtector.Lib.Discord;
@@ -60,6 +65,11 @@ public class JaoProtector extends JavaPlugin {
 		registEvent(new Event_TNT(this)); // 2018/06/30
 		registEvent(new Event_Water(this)); // 2018/06/30
 		registEvent(new Event_Lava(this)); // 2018/06/30
+		registEvent(new Event_EndCrystal(this)); // 2018/07/08
+		registEvent(new Event_Fire(this)); // 2018/07/08
+		registEvent(new Event_FireBall(this)); // 2018/07/08
+		registEvent(new Event_Flint_and_steel(this)); // 2018/07/08
+		registEvent(new Event_MobSpawner(this)); // 2018/07/08
 	}
 
 	/**
@@ -186,7 +196,7 @@ public class JaoProtector extends JavaPlugin {
 		for(Player p: Bukkit.getServer().getOnlinePlayers()) {
 			String group = PermissionsManager.getPermissionMainGroup(p);
 			if(group.equalsIgnoreCase("Admin") || group.equalsIgnoreCase("Moderator")) {
-				p.sendMessage("[MyMaid] " + ChatColor.GREEN + "MyMaidのシステム障害が発生しました。");
+				p.sendMessage("[MyMaid] " + ChatColor.GREEN + "jaoProtectorのシステム障害が発生しました。");
 				p.sendMessage("[MyMaid] " + ChatColor.GREEN + "エラー: " + exception.getMessage());
 			}
 		}
@@ -195,7 +205,7 @@ public class JaoProtector extends JavaPlugin {
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		exception.printStackTrace(pw);
-		boolean res = Discord.send("293856671799967744", "MyMaidでエラーが発生しました。" + "\n"
+		boolean res = Discord.send("293856671799967744", "jaoProtectorでエラーが発生しました。" + "\n"
 				+ "```" + sw.toString() + "```\n"
 				+ "Cause: `" + exception.getCause() + "`\n"
 				+ "報告ID: `" + id + "`");
@@ -211,7 +221,7 @@ public class JaoProtector extends JavaPlugin {
 	}
 	public static JavaPlugin JavaPlugin(){
 		if(JaoProtector.JavaPlugin == null){
-			throw new NullPointerException("getJavaPlugin()が呼び出されましたが、MyMaid2.javapluginはnullでした。");
+			throw new NullPointerException("getJavaPlugin()が呼び出されましたが、jaoProtector.javapluginはnullでした。");
 		}
 		return JaoProtector.JavaPlugin;
 	}

@@ -1,6 +1,6 @@
-name: jaoProtector
+name: ${project.artifactId}
 main: com.jaoafa.jaoProtector.JaoProtector
-version: 0.0.1
+version: ${project.version}
 description: jao Minecraft Server 保護プラグイン
 database: true
 softdepend: [PermissionsEx, LuckPerms]
