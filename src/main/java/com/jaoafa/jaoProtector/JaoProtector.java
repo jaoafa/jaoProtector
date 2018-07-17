@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.jaoafa.jaoProtector.Event.Event_AntiItemFrameBreak;
 import com.jaoafa.jaoProtector.Event.Event_EndCrystal;
 import com.jaoafa.jaoProtector.Event.Event_Fire;
 import com.jaoafa.jaoProtector.Event.Event_FireBall;
@@ -70,6 +71,7 @@ public class JaoProtector extends JavaPlugin {
 		registEvent(new Event_FireBall(this)); // 2018/07/08
 		registEvent(new Event_Flint_and_steel(this)); // 2018/07/08
 		registEvent(new Event_MobSpawner(this)); // 2018/07/08
+		registEvent(new Event_AntiItemFrameBreak(this)); // 2018/07/17
 	}
 
 	/**
