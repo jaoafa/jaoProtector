@@ -3,5 +3,5 @@ main: com.jaoafa.jaoProtector.JaoProtector
 version: ${project.version}
 description: jao Minecraft Server 保護プラグイン
 database: true
-softdepend: [PermissionsEx, LuckPerms]
+softdepend: [PermissionsEx, LuckPerms, WorldGuard]
 author: mine_book000

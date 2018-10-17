@@ -64,42 +64,39 @@ public class Event_Fire implements Listener {
 
 		ItemStack is = event.getClickedInventory().getItem(event.getSlot());
 
-		if(is == null){
-			return;
-		}
-		if(is.getType() != RegulationBlock){
-			return;
-		}
-		if(!isRegulationGroup(player)){
-			return;
+		if(is != null){
+			if(is.getType() == RegulationBlock){
+				if(!isRegulationGroup(player)){
+					event.setCancelled(true);
+					event.getInventory().remove(RegulationBlock);
+					event.getClickedInventory().remove(RegulationBlock);
+				}
+			}
 		}
 
 		is = event.getCurrentItem();
 
-		if(is == null){
-			return;
-		}
-		if(is.getType() != RegulationBlock){
-			return;
-		}
-		if(!isRegulationGroup(player)){
-			return;
+		if(is != null){
+			if(is.getType() == RegulationBlock){
+				if(!isRegulationGroup(player)){
+					event.setCancelled(true);
+					event.getInventory().remove(RegulationBlock);
+					event.getClickedInventory().remove(RegulationBlock);
+				}
+			}
 		}
 
 		is = event.getCursor();
 
-		if(is == null){
-			return;
+		if(is != null){
+			if(is.getType() == RegulationBlock){
+				if(!isRegulationGroup(player)){
+					event.setCancelled(true);
+					event.getInventory().remove(RegulationBlock);
+					event.getClickedInventory().remove(RegulationBlock);
+				}
+			}
 		}
-		if(is.getType() != RegulationBlock){
-			return;
-		}
-		if(!isRegulationGroup(player)){
-			return;
-		}
-
-		event.setCancelled(true);
-		event.getInventory().remove(RegulationBlock);
 	}
 	@EventHandler
 	public void onPlayerMoveEvent(PlayerMoveEvent event){
@@ -111,10 +108,10 @@ public class Event_Fire implements Listener {
 				continue;
 			}
 			if(is.getType() != RegulationBlock){
-				return;
+				continue;
 			}
 			if(!isRegulationGroup(player)){
-				return;
+				continue;
 			}
 			player.getInventory().remove(RegulationBlock);
 			break;

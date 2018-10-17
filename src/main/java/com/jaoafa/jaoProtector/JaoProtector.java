@@ -10,16 +10,21 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.Nullable;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.jaoafa.jaoProtector.Event.Event_AntiItemFrameBreak;
+import com.jaoafa.jaoProtector.Event.Event_AntiPeriodBreak;
 import com.jaoafa.jaoProtector.Event.Event_EndCrystal;
 import com.jaoafa.jaoProtector.Event.Event_Fire;
 import com.jaoafa.jaoProtector.Event.Event_FireBall;
@@ -31,6 +36,10 @@ import com.jaoafa.jaoProtector.Event.Event_Water;
 import com.jaoafa.jaoProtector.Lib.Discord;
 import com.jaoafa.jaoProtector.Lib.MySQL;
 import com.jaoafa.jaoProtector.Lib.PermissionsManager;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 
 public class JaoProtector extends JavaPlugin {
 
@@ -51,10 +60,13 @@ public class JaoProtector extends JavaPlugin {
 	public void onEnable() {
 		JavaPlugin = this;
 
+		Load_Config(); // Config Load
+		if(!this.isEnabled()) return;
+
 		// リスナーを設定
 		Import_Listener();
-
-		Load_Config(); // Config Load
+		Import_Task();
+		addFlags();
 	}
 
 	/**
@@ -72,6 +84,7 @@ public class JaoProtector extends JavaPlugin {
 		registEvent(new Event_Flint_and_steel(this)); // 2018/07/08
 		registEvent(new Event_MobSpawner(this)); // 2018/07/08
 		registEvent(new Event_AntiItemFrameBreak(this)); // 2018/07/17
+		registEvent(new Event_AntiPeriodBreak()); // 2018/07/29
 	}
 
 	/**
@@ -80,6 +93,48 @@ public class JaoProtector extends JavaPlugin {
 	 */
 	private void registEvent(Listener l) {
 		getServer().getPluginManager().registerEvents(l, this);
+	}
+
+	/**
+	 * スケジューリング
+	 * @author mine_book000
+	 */
+	private void Import_Task(){
+		new Event_AntiPeriodBreak().runTaskTimerAsynchronously(this, 0L, 200L); // 2018/07/29
+	}
+
+	public static final StateFlag USE_NOTE_BLOCK = new StateFlag("use-note-block", false);
+
+	private void addFlags(){
+		WorldGuardPlugin worldGuardPlugin = getWorldGuard();
+		FlagRegistry registry = worldGuardPlugin.getFlagRegistry();
+
+		getLogger().info("---------- Add Custom Flag ----------");
+
+		addFlag(registry, USE_NOTE_BLOCK);
+
+		getLogger().info("---------- Add Custom Flag END ----------");
+	}
+
+	void addFlag(FlagRegistry registry, StateFlag Flag){
+		try {
+			registry.register(Flag);
+			getLogger().info("Added " + Flag.getName());
+		} catch (FlagConflictException e) {
+			getLogger().info("Missed " + Flag.getName());
+		}
+	}
+
+	@Nullable
+	public static WorldGuardPlugin getWorldGuard() {
+		Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
+
+		// WorldGuard may not be loaded
+		if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
+			return null; // Maybe you want throw an exception instead
+		}
+
+		return (WorldGuardPlugin) plugin;
 	}
 
 	/**
@@ -138,6 +193,30 @@ public class JaoProtector extends JavaPlugin {
 			return;
 		}
 		getLogger().info("MySQL Connect successful.");
+	}
+
+	public boolean AntiBORDERSave(String name, int i){
+		File file = new File(JavaPlugin().getDataFolder(), "AntiBorder.yml");
+		FileConfiguration data = YamlConfiguration.loadConfiguration(file);
+		data.set(name, i);
+		try {
+			data.save(file);
+			return true;
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static Integer AntiBORDERLoad(String name){
+		File file = new File(JavaPlugin().getDataFolder(), "AntiBorder.yml");
+		FileConfiguration data = YamlConfiguration.loadConfiguration(file);
+		if(data.contains(name)){
+			int i = data.getInt(name);
+			return i;
+		}else{
+			return null;
+		}
 	}
 
 	/**
