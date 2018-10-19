@@ -66,7 +66,7 @@ public class Event_EndCrystal implements Listener {
 
 		if(is != null){
 			if(is.getType() == RegulationBlock){
-				if(!isRegulationGroup(player)){
+				if(isRegulationGroup(player)){
 					event.setCancelled(true);
 					event.getInventory().remove(RegulationBlock);
 					event.getClickedInventory().remove(RegulationBlock);
@@ -78,7 +78,7 @@ public class Event_EndCrystal implements Listener {
 
 		if(is != null){
 			if(is.getType() == RegulationBlock){
-				if(!isRegulationGroup(player)){
+				if(isRegulationGroup(player)){
 					event.setCancelled(true);
 					event.getInventory().remove(RegulationBlock);
 					event.getClickedInventory().remove(RegulationBlock);
@@ -90,7 +90,7 @@ public class Event_EndCrystal implements Listener {
 
 		if(is != null){
 			if(is.getType() == RegulationBlock){
-				if(!isRegulationGroup(player)){
+				if(isRegulationGroup(player)){
 					event.setCancelled(true);
 					event.getInventory().remove(RegulationBlock);
 					event.getClickedInventory().remove(RegulationBlock);
