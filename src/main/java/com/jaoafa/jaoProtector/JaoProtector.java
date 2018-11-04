@@ -23,6 +23,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.jaoafa.jaoProtector.Event.AntiBlockUnderDestroy;
 import com.jaoafa.jaoProtector.Event.Event_AntiItemFrameBreak;
 import com.jaoafa.jaoProtector.Event.Event_AntiPeriodBreak;
 import com.jaoafa.jaoProtector.Event.Event_EndCrystal;
@@ -85,6 +86,7 @@ public class JaoProtector extends JavaPlugin {
 		registEvent(new Event_MobSpawner(this)); // 2018/07/08
 		registEvent(new Event_AntiItemFrameBreak(this)); // 2018/07/17
 		registEvent(new Event_AntiPeriodBreak()); // 2018/07/29
+		registEvent(new AntiBlockUnderDestroy(this)); // 2018/11/01
 	}
 
 	/**
