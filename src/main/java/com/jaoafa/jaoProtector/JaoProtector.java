@@ -38,9 +38,6 @@ import com.jaoafa.jaoProtector.Lib.Discord;
 import com.jaoafa.jaoProtector.Lib.MySQL;
 import com.jaoafa.jaoProtector.Lib.PermissionsManager;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
-import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 
 public class JaoProtector extends JavaPlugin {
 
@@ -67,7 +64,7 @@ public class JaoProtector extends JavaPlugin {
 		// リスナーを設定
 		Import_Listener();
 		Import_Task();
-		addFlags();
+		//addFlags();
 	}
 
 	/**
@@ -104,7 +101,7 @@ public class JaoProtector extends JavaPlugin {
 	private void Import_Task(){
 		new Event_AntiPeriodBreak().runTaskTimerAsynchronously(this, 0L, 200L); // 2018/07/29
 	}
-
+	/*
 	public static final StateFlag USE_NOTE_BLOCK = new StateFlag("use-note-block", false);
 
 	private void addFlags(){
@@ -126,6 +123,7 @@ public class JaoProtector extends JavaPlugin {
 			getLogger().info("Missed " + Flag.getName());
 		}
 	}
+	*/
 
 	@Nullable
 	public static WorldGuardPlugin getWorldGuard() {
