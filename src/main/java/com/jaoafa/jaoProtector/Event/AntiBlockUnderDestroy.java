@@ -108,7 +108,7 @@ public class AntiBlockUnderDestroy implements Listener {
 		player.sendMessage("[BlockDestroy] " + ChatColor.RED + "荒らし対策のため、ブロックの直下掘りは禁止されています。");
 		player.sendMessage("[BlockDestroy] " + ChatColor.RED + "修復が見られない場合、荒らしとして処罰される場合があります。");
 		if(destroyAlerted.containsKey(uuid) && !destroyAlerted.get(uuid)){
-			Discord.send("293856671799967744", "__**[BlockDestroy]**__ プレイヤー「" + player.getName() + "」が直下掘りを" + world.getName() + "の" + x + " " + y + " " + z + "で行いました。");
+			Discord.send("223582668132974594", ":pick:__**[BlockDestroy]**__ プレイヤー「" + player.getName() + "」が直下掘りを" + world.getName() + "の" + x + " " + y + " " + z + "で行いました。");
 		}
 		destroyAlerted.put(uuid, true);
 		event.setCancelled(true);

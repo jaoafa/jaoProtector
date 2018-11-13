@@ -26,6 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.jaoafa.jaoProtector.Event.AntiBlockUnderDestroy;
 import com.jaoafa.jaoProtector.Event.Event_AntiItemFrameBreak;
 import com.jaoafa.jaoProtector.Event.Event_AntiPeriodBreak;
+import com.jaoafa.jaoProtector.Event.Event_Dispenser;
 import com.jaoafa.jaoProtector.Event.Event_EndCrystal;
 import com.jaoafa.jaoProtector.Event.Event_Fire;
 import com.jaoafa.jaoProtector.Event.Event_FireBall;
@@ -86,6 +87,7 @@ public class JaoProtector extends JavaPlugin {
 		registEvent(new Event_AntiPeriodBreak()); // 2018/07/29
 		registEvent(new AntiBlockUnderDestroy(this)); // 2018/11/01
 		registEvent(new Event_ICE(this)); // 2018/11/10
+		registEvent(new Event_Dispenser(this)); // 2018/11/14
 	}
 
 	/**
