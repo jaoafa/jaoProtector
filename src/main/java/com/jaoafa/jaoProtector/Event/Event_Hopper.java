@@ -16,15 +16,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.jaoafa.jaoProtector.Lib.PermissionsManager;
 
-public class Event_Dispenser implements Listener {
+public class Event_Hopper implements Listener {
 	JavaPlugin plugin;
-	public Event_Dispenser(JavaPlugin plugin) {
+	public Event_Hopper(JavaPlugin plugin) {
 		this.plugin = plugin;
 	}
 
 	/* --------------------- CONFIG START --------------------- */
 
-	Material RegulationBlock = Material.DISPENSER; // 規制するブロックマテリアル
+	Material RegulationBlock = Material.HOPPER; // 規制するブロックマテリアル
 	String[] RegulationGroups = {"Limited", "QPPE", "Default"}; // 規制権限グループ
 
 	/* --------------------- CONFIG END --------------------- */

@@ -31,9 +31,11 @@ import com.jaoafa.jaoProtector.Event.Event_EndCrystal;
 import com.jaoafa.jaoProtector.Event.Event_Fire;
 import com.jaoafa.jaoProtector.Event.Event_FireBall;
 import com.jaoafa.jaoProtector.Event.Event_Flint_and_steel;
+import com.jaoafa.jaoProtector.Event.Event_Hopper;
 import com.jaoafa.jaoProtector.Event.Event_ICE;
 import com.jaoafa.jaoProtector.Event.Event_Lava;
 import com.jaoafa.jaoProtector.Event.Event_MobSpawner;
+import com.jaoafa.jaoProtector.Event.Event_SpawnEggRegulation;
 import com.jaoafa.jaoProtector.Event.Event_TNT;
 import com.jaoafa.jaoProtector.Event.Event_Water;
 import com.jaoafa.jaoProtector.Lib.Discord;
@@ -88,6 +90,8 @@ public class JaoProtector extends JavaPlugin {
 		registEvent(new AntiBlockUnderDestroy(this)); // 2018/11/01
 		registEvent(new Event_ICE(this)); // 2018/11/10
 		registEvent(new Event_Dispenser(this)); // 2018/11/14
+		registEvent(new Event_Hopper(this)); // 2018/12/18
+		registEvent(new Event_SpawnEggRegulation(this)); // 2018/12/18
 	}
 
 	/**
